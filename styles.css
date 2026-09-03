@@ -1,0 +1,415 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #00ff88;
+    --primary-dark: #00cc6a;
+    --secondary: #ff006e;
+    --bg: #0a0e27;
+    --bg-light: #1a1f3a;
+    --text: #ffffff;
+    --accent: #00d4ff;
+    --success: #00ff88;
+    --danger: #ff006e;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, var(--bg) 0%, #1a0033 100%);
+    color: var(--text);
+    overflow: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Menu & Content */
+.menu-content,
+.instructions-content,
+.flag-content,
+.win-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(26, 31, 58, 0.95);
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    max-width: 600px;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: 3em;
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: var(--accent);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.instructions-content h2,
+.flag-content h2,
+.win-content h1 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--primary);
+    font-size: 2em;
+}
+
+.instructions-content ul {
+    text-align: left;
+    margin-bottom: 30px;
+    list-style: none;
+}
+
+.instructions-content li {
+    padding: 10px 0;
+    font-size: 1.1em;
+    color: var(--text);
+    border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 30px;
+    margin: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #000;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.btn-secondary {
+    background: rgba(0, 255, 136, 0.2);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 255, 136, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Game Screen */
+.game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg) 0%, #1a0033 100%);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.health-bar {
+    width: 200px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.health-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    transition: width 0.3s ease;
+}
+
+.score {
+    font-size: 1.3em;
+    color: var(--primary);
+    text-shadow: 0 0 5px var(--primary);
+}
+
+#gameCanvas {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 100%);
+    border: 3px solid var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    display: block;
+}
+
+.controls {
+    margin-top: 20px;
+    color: var(--accent);
+    font-size: 0.9em;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(26, 31, 58, 0.98);
+    border: 3px solid var(--secondary);
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+    animation: slideUp 0.4s ease-out;
+}
+
+#questionTitle {
+    color: var(--secondary);
+    text-shadow: 0 0 10px var(--secondary);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+#questionText {
+    font-size: 1.2em;
+    color: var(--text);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+#optionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.option {
+    background: rgba(255, 0, 110, 0.1);
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-size: 1.1em;
+}
+
+.option:hover {
+    background: rgba(255, 0, 110, 0.3);
+    transform: translateX(5px);
+}
+
+.option.selected {
+    background: rgba(255, 0, 110, 0.5);
+    border-color: var(--primary);
+}
+
+#feedbackMessage {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+#feedbackMessage.correct {
+    color: var(--success);
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--success);
+}
+
+#feedbackMessage.incorrect {
+    color: var(--danger);
+    background: rgba(255, 0, 110, 0.1);
+    border: 1px solid var(--danger);
+}
+
+/* Flag Screen */
+.flag-box {
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.flag-text {
+    font-size: 1.5em;
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+    word-break: break-all;
+    font-weight: bold;
+}
+
+.flag-instructions {
+    color: var(--accent);
+    margin: 20px 0 10px;
+    font-size: 1.1em;
+}
+
+#flagInput {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--primary);
+    color: var(--text);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+}
+
+#flagInput:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--primary);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#flagFeedback {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+#flagFeedback.correct {
+    color: var(--success);
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid var(--success);
+}
+
+#flagFeedback.incorrect {
+    color: var(--danger);
+    background: rgba(255, 0, 110, 0.1);
+    border: 1px solid var(--danger);
+}
+
+/* Win Screen */
+.win-content {
+    border-color: var(--success);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.win-content h1 {
+    color: var(--success);
+    text-shadow: 0 0 20px var(--success);
+    font-size: 3.5em;
+    margin-bottom: 30px;
+}
+
+.win-message {
+    font-size: 1.3em;
+    color: var(--accent);
+    margin-bottom: 30px;
+}
+
+.stats {
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid var(--success);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.stats p {
+    font-size: 1.2em;
+    color: var(--primary);
+    padding: 10px 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .title {
+        font-size: 2em;
+    }
+
+    #gameCanvas {
+        width: 90vw;
+        max-width: 700px;
+        height: auto;
+    }
+
+    .game-header {
+        width: 90vw;
+        max-width: 700px;
+    }
+}

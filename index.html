@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity CTF Maze Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen">
+            <div class="menu-content">
+                <h1 class="title">🔐 CTF MAZE CHALLENGE 🔐</h1>
+                <p class="subtitle">You're a cybersecurity trainee at TechCorp. The company's network has been hacked, and critical security protocols are scattered throughout the digital infrastructure. Navigate through the compromised network maze, show your cybersecurity knowledge at each security checkpoint, and retrieve the master security flag!</p>
+                <button class="btn btn-primary" onclick="startGame()">Start Game</button>
+                <button class="btn btn-secondary" onclick="showInstructions()">How to Play</button>
+            </div>
+        </div>
+
+        <!-- Instructions Screen -->
+        <div id="instructionsScreen" class="screen hidden">
+            <div class="instructions-content">
+                <h2>How to Play</h2>
+                <ul>
+                    <li>🎮 Use <strong>Arrow Keys</strong> or <strong>WASD</strong> to move your character</li>
+                    <li>❓ Answer cybersecurity questions at checkpoints to progress</li>
+                    <li>🏁 Reach the exit and collect the flag</li>
+                    <li>📝 Submit the flag to win the game</li>
+                </ul>
+                <button class="btn btn-primary" onclick="backToMenu()">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen hidden">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="health-bar">
+                        <div id="healthFill" class="health-fill"></div>
+                    </div>
+                    <div class="score">Score: <span id="score">0</span></div>
+                </div>
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+                <div class="controls">
+                    <p>🎮 Use Arrow Keys or WASD to move</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Modal -->
+        <div id="questionModal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="questionTitle">Cybersecurity Question</h2>
+                <p id="questionText"></p>
+                <div id="optionsContainer"></div>
+                <div id="feedbackMessage"></div>
+                <button id="submitBtn" class="btn btn-primary" onclick="submitAnswer()">Submit Answer</button>
+            </div>
+        </div>
+
+        <!-- Flag Submission Screen -->
+        <div id="flagScreen" class="screen hidden">
+            <div class="flag-content">
+                <h2>🎉 You Reached the Exit! 🎉</h2>
+                <p class="flag-instructions">Enter the flag below to save the college:</p>
+                <input type="text" id="flagInput" placeholder="Enter your flag here..." />
+                <button class="btn btn-primary" onclick="checkFlag()">Submit Flag</button>
+                <div id="flagFeedback"></div>
+                <button class="btn btn-secondary" onclick="backToMenu()">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="winScreen" class="screen hidden">
+            <div class="win-content">
+                <h1>🏆 YOU WIN! 🏆</h1>
+                <p class="win-message">Congratulations! You successfully captured the flag and saved the day!</p>
+                <div class="stats">
+                    <p>Score: <span id="finalScore">0</span></p>
+                    <p>Questions Answered: <span id="questionsAnswered">0</span></p>
+                </div>
+                <button class="btn btn-primary" onclick="backToMenu()">Go Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
